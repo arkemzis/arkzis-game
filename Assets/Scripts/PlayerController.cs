@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = new Vector3(h, 0, v).normalized;
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
 
-        // Гравитация + прыжок
         if (controller.isGrounded)
         {
             if (verticalVelocity < 0f) verticalVelocity = -2f;
@@ -45,12 +44,10 @@ public class PlayerController : MonoBehaviour
             verticalVelocity += gravity * Time.deltaTime;
         }
 
-        // Движение
         Vector3 move = moveDir * currentSpeed;
         move.y = verticalVelocity;
         controller.Move(move * Time.deltaTime);
 
-        // Поворот кубика в сторону движения
         if (moveDir != Vector3.zero)
         {
             Quaternion targetRot = Quaternion.LookRotation(moveDir);
